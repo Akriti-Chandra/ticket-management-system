@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: ticket-management
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ticket_management
+    username: postgres
+    password: Password
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    defer-datasource-initialization: true
+    open-in-view: false
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.ticketsystem: INFO
