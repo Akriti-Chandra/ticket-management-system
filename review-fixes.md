@@ -144,6 +144,7 @@ Post-review changes applied to the Support Ticket Management System. Source: AI-
 |-------|--------|
 | `GET /api/tickets/{id}` returns user names | Pass |
 | `./gradlew test` with PostgreSQL | Pass (20 tests) |
+| `npm test` (frontend) | Pass (35 tests) |
 | Backend starts with schema + seed | Pass |
 | Frontend E2E: list → detail → status → comment | Pass |
 | `npm run build` | Pass |
@@ -154,7 +155,7 @@ Post-review changes applied to the Support Ticket Management System. Source: AI-
 
 Documented for follow-up — not blockers for assignment submission:
 
-- No frontend automated tests
+- E2E browser tests with live backend (Playwright/Cypress)
 - Integration tests require live PostgreSQL (no Testcontainers)
 - `UserRole` not enforced in API
 - No optimistic locking on concurrent updates

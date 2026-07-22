@@ -176,11 +176,22 @@ npm run build
 npm run preview
 ```
 
+### Run frontend tests
+
+```bash
+cd frontend
+npm test
+```
+
+Vitest + React Testing Library cover pages, utilities, and shared components (mocked API). See `test-strategy.md` for details.
+
 ---
 
 ## Seed data
 
-`data.sql` inserts six users with mixed roles (`EMPLOYEE`, `SUPPORT_AGENT`, `ADMIN`) and two sample tickets with comments. Inserts are idempotent (`ON CONFLICT` / `NOT EXISTS`), so restarting the backend does not duplicate seed rows.
+`data.sql` inserts six users with mixed roles (`EMPLOYEE`, `SUPPORT_AGENT`, `ADMIN`), **two** sample tickets (`OPEN`, `IN_PROGRESS`), and two comments. Inserts are idempotent (`ON CONFLICT` / `NOT EXISTS`), so restarting the backend does not duplicate seed rows.
+
+> **Note:** The standalone scripts in `database/seed-data/` include four tickets and four comments for manual `psql` setup. If you want the same richer demo data on automatic startup, sync those inserts into `backend/src/main/resources/data.sql` (see `database/setup-notes.md`).
 
 Example seeded users:
 

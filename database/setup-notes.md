@@ -78,11 +78,13 @@ ORDER BY t.updated_at DESC;
 
 Expected seed counts after a fresh load:
 
-| Table | Rows |
-|-------|------|
-| `users` | 6 |
-| `tickets` | 4 |
-| `comments` | 4 |
+| Table | Rows (`data.sql` on startup) | Rows (manual `database/seed-data/`) |
+|-------|------------------------------|-------------------------------------|
+| `users` | 6 | 6 |
+| `tickets` | 2 | 4 |
+| `comments` | 2 | 4 |
+
+> **Sync note:** `backend/src/main/resources/data.sql` (used by Spring Boot on startup) currently seeds **2 tickets and 2 comments**. The `database/seed-data/` scripts add two more tickets (`RESOLVED`, `CLOSED`) and two more comments. Keep these in sync if you want identical data whether you use `bootRun` or manual `psql` setup.
 
 ## Schema reference
 

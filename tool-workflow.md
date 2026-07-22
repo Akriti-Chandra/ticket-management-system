@@ -241,12 +241,12 @@ AI is used to **scaffold tests from requirements**, not to replace judgment on w
 
 - Decide test pyramid balance (heavy on integration for the state machine)
 - Fix framework API misuse (Mockito, Spring test profiles)
-- Document gaps in `test-strategy.md` (no frontend automated tests, partial PUT/list coverage)
+- Document gaps in `test-strategy.md` (E2E browser tests, partial PUT/list coverage)
 - Defer Testcontainers unless CI requirements justify the dependency
 
 ### Frontend testing
 
-Frontend tests were **manual only** for this project. AI helped define a manual smoke checklist (list search, status buttons, form errors) documented in `test-strategy.md`. For a real project, the next step would be AI-scaffolded Vitest + React Testing Library tests for `TicketDetailPage` status button rendering.
+Frontend component tests use **Vitest + React Testing Library** (9 files, 35 tests). AI scaffolded test files for pages and utilities with mocked API modules. Key coverage: `TicketDetailPage` renders status buttons only from `allowedNextStatuses`. Manual E2E in the browser still supplements automated tests for full lifecycle flows with a live backend.
 
 ---
 
@@ -305,7 +305,7 @@ Ask Cursor to review against:
 |----------|----------|
 | **Pass** | Status machine centralized; `PUT` vs `PATCH /status` split; API-driven UI buttons |
 | **High** | Lazy-load risk on detail endpoints — fixed with `findByIdWithUsers` |
-| **Medium** | No frontend tests; integration tests require local PostgreSQL |
+| **Medium** | No E2E browser tests; integration tests require local PostgreSQL |
 | **Low** | Duplicate UI controls, redundant Refresh button |
 
 ### Post-review actions

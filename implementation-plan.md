@@ -13,51 +13,52 @@ Build a full-stack **Support Ticket Management System** with a Spring Boot REST 
 ## Task Breakdown
 
 ### Phase 1 — Analysis & design
-- [ ] Review assignment requirements and select project option.
-- [ ] Write `requirements-analysis.md` (functional/non-functional requirements, assumptions, edge cases).
-- [ ] Write `acceptance-criteria.md` with verifiable done conditions.
-- [ ] Define status transition matrix and API endpoint list.
+- [x] Review assignment requirements and select project option.
+- [x] Write `requirements-analysis.md` (functional/non-functional requirements, assumptions, edge cases).
+- [x] Write `acceptance-criteria.md` with verifiable done conditions.
+- [x] Define status transition matrix and API endpoint list.
 
 ### Phase 2 — Backend foundation
-- [ ] Scaffold Spring Boot project (Gradle, Java 21).
-- [ ] Create PostgreSQL schema (`users`, `tickets`, `comments`) with constraints and indexes.
-- [ ] Add seed data (`data.sql`) for users, sample tickets, and comments.
-- [ ] Implement JPA entities and repositories.
-- [ ] Configure `application.yml` (datasource, SQL init) and CORS for `localhost:5173`.
+- [x] Scaffold Spring Boot project (Gradle, Java 21).
+- [x] Create PostgreSQL schema (`users`, `tickets`, `comments`) with constraints and indexes.
+- [x] Add seed data (`data.sql`) for users, sample tickets, and comments.
+- [x] Implement JPA entities and repositories.
+- [x] Configure `application.yml` (datasource, SQL init) and CORS for `localhost:5173`.
 
 ### Phase 3 — Backend business logic & API
-- [ ] Implement `TicketStatusTransitionValidator` with allowed-transition map.
-- [ ] Implement `TicketService` (create, search, update, updateStatus).
-- [ ] Implement `CommentService` and `UserService`.
-- [ ] Build REST controllers: tickets, comments, users.
-- [ ] Add DTOs, mappers, and request validation (`@Valid`).
-- [ ] Add `GlobalExceptionHandler` (validation, not-found, invalid transition, generic 500).
-- [ ] Configure OpenAPI/Swagger.
+- [x] Implement `TicketStatusTransitionValidator` with allowed-transition map.
+- [x] Implement `TicketService` (create, search, update, updateStatus).
+- [x] Implement `CommentService` and `UserService`.
+- [x] Build REST controllers: tickets, comments, users.
+- [x] Add DTOs, mappers, and request validation (`@Valid`).
+- [x] Add `GlobalExceptionHandler` (validation, not-found, invalid transition, generic 500).
+- [x] Configure OpenAPI/Swagger.
 
 ### Phase 4 — Backend testing
-- [ ] Unit tests for `TicketStatusTransitionValidator`.
-- [ ] Service tests for `TicketService` (mocked repositories).
-- [ ] Integration tests for all valid and invalid status transitions.
-- [ ] Integration tests for validation errors, comment creation, and user listing.
+- [x] Unit tests for `TicketStatusTransitionValidator`.
+- [x] Service tests for `TicketService` (mocked repositories).
+- [x] Integration tests for all valid and invalid status transitions.
+- [x] Integration tests for validation errors, comment creation, and user listing.
 
 ### Phase 5 — Frontend foundation
-- [ ] Scaffold Vite + React + TypeScript project with MUI.
-- [ ] Set up routing (`/`, `/tickets/new`, `/tickets/:id`, `/tickets/:id/edit`).
-- [ ] Create Axios client with configurable `VITE_API_BASE_URL`.
-- [ ] Define shared TypeScript types matching API responses.
+- [x] Scaffold Vite + React + TypeScript project with MUI.
+- [x] Set up routing (`/`, `/tickets/new`, `/tickets/:id`, `/tickets/:id/edit`).
+- [x] Create Axios client with configurable `VITE_API_BASE_URL`.
+- [x] Define shared TypeScript types matching API responses.
 
 ### Phase 6 — Frontend features
-- [ ] **Ticket list page** — table, keyword search (debounced), status filter, pagination.
-- [ ] **Create ticket page** — form with user dropdowns for assignee/creator.
-- [ ] **Ticket detail page** — metadata, status chip, dynamic status buttons from `allowedNextStatuses`, comment list and add form.
-- [ ] **Edit ticket page** — update title, description, priority, assignee (not status).
-- [ ] Shared utilities: status labels/colors, date formatting, error/snackbar handling.
+- [x] **Ticket list page** — table, keyword search (debounced), status filter, pagination.
+- [x] **Create ticket page** — form with user dropdowns for assignee/creator.
+- [x] **Ticket detail page** — metadata, status chip, dynamic status buttons from `allowedNextStatuses`, comment list and add form.
+- [x] **Edit ticket page** — update title, description, priority, assignee (not status).
+- [x] Shared utilities: status labels/colors, date formatting, error/snackbar handling.
+- [x] Frontend component tests (Vitest + React Testing Library).
 
 ### Phase 7 — Documentation & submission
-- [ ] Write `README.md` (setup, env vars, endpoints, run instructions).
-- [ ] Complete `candidate-info.md`, `implementation-plan.md`, `ai-usage-log.md`.
-- [ ] Manual end-to-end smoke test (create → transition → comment → close).
-- [ ] Final review against `acceptance-criteria.md`.
+- [x] Write `README.md` (setup, env vars, endpoints, run instructions).
+- [x] Complete `candidate-info.md`, `implementation-plan.md`, `final-ai-usage-summary.md`.
+- [x] Manual end-to-end smoke test (create → transition → comment → close).
+- [x] Final review against `acceptance-criteria.md`.
 
 ## Milestones
 
@@ -87,7 +88,7 @@ Build a full-stack **Support Ticket Management System** with a Spring Boot REST 
 **Principles:**
 - Use AI for boilerplate, test scaffolding, and first drafts — not for blindly accepting business logic.
 - Always run `./gradlew test` and manual UI checks after AI-generated changes.
-- Log significant AI interactions in `ai-usage-log.md` with prompt summary and outcome.
+- Log significant AI interactions in `final-ai-usage-summary.md` and `ai-prompts/` with prompt summary and outcome.
 
 ## Risks
 

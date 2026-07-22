@@ -45,7 +45,7 @@ Overall: architecture and core business rules are sound. Main risks were JPA fet
 
 ### Frontend — areas to watch
 
-- **No automated tests.** All UI verification is manual; regressions in form handling or status buttons would not be caught in CI.
+- **Component tests use mocked API.** Vitest + RTL cover page behavior with mocked `ticketsApi` / `commentsApi` / `usersApi`; no automated E2E against a live backend.
 - **Page-level state only.** No shared cache — navigating back to the list always refetches. Fine for this size app.
 - **`showSnackbar` in `useCallback` deps.** Can cause unnecessary re-fetches if the snackbar hook identity changes; minor, not causing bugs today.
 - **Comment list optimistic prepend.** New comment is prepended locally on success; assumes server order matches (newest first) — matches backend behavior.
@@ -92,4 +92,4 @@ Overall: architecture and core business rules are sound. Main risks were JPA fet
 
 The codebase meets the assignment's core goals: enforced status workflow on the backend, thin frontend client, REST API with validation and error handling, and integration tests for the state machine. Post-review changes focused on **JPA fetch correctness**, **test reliability**, and **UX polish** rather than architectural rewrites — appropriate for the scope and timeline.
 
-**Recommended follow-ups (post-submission):** Testcontainers for CI, frontend component tests for `TicketDetailPage` status buttons, integration tests for `PUT` and list/search endpoints, and role-based authorization if the product owner confirms requirements.
+**Recommended follow-ups (post-submission):** Testcontainers for CI, Playwright E2E tests, integration tests for `PUT` and list/search endpoints, and role-based authorization if the product owner confirms requirements.

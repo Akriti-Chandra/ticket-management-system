@@ -111,7 +111,7 @@ No AI-generated code was accepted without at least one of: build, test suite, or
 
 - Spring Boot REST API (controllers, services, repositories, validation)
 - React SPA (4 pages, API modules, shared components/hooks)
-- 20 backend tests (unit, service, integration)
+- 20 backend tests + 35 frontend Vitest tests (unit, service, integration, component)
 - PostgreSQL schema and seed data
 
 ### Documentation
@@ -140,7 +140,7 @@ No AI-generated code was accepted without at least one of: build, test suite, or
 | Priority | Item |
 |----------|------|
 | High | Testcontainers for CI-friendly integration tests |
-| High | Frontend tests (Vitest + RTL) for status button rendering |
+| Medium | Playwright E2E tests against live backend |
 | Medium | Integration tests for `PUT`, list/search |
 | Medium | Role-based authorization (`UserRole` enforcement) |
 | Low | Status change audit trail, optimistic locking |

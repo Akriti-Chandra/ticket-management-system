@@ -2,7 +2,7 @@
 
 ## Test Scope
 
-Testing focuses on the **backend**, where all business rules (especially the ticket status state machine) are enforced. The frontend is validated through manual end-to-end smoke testing rather than automated tests.
+Testing focuses on the **backend**, where all business rules (especially the ticket status state machine) are enforced. The **frontend** has Vitest + React Testing Library coverage for pages, utilities, and shared components; manual end-to-end smoke testing supplements automated UI tests.
 
 | Area | In scope | Out of scope |
 |------|----------|--------------|
@@ -11,7 +11,7 @@ Testing focuses on the **backend**, where all business rules (especially the tic
 | Comment creation & user listing | Yes (integration) | Comment list ordering, comment validation errors |
 | Request validation (`@Valid`) | Partial (blank title on create) | All field-level rules per endpoint |
 | Error responses (400, 404, 500) | Partial (400 transitions, 404 in service unit test) | 500 generic handler |
-| Frontend UI / routing | Manual only | Automated component/E2E tests |
+| Frontend UI / routing | Vitest + RTL (pages, utils, snackbar) | E2E (Playwright/Cypress) |
 | Authentication / authorization | — | No auth in current scope |
 | Performance / load testing | — | Not required for assignment |
 
@@ -19,6 +19,8 @@ Testing focuses on the **backend**, where all business rules (especially the tic
 
 ```
         ┌─────────────┐
+        │  Frontend   │  Vitest + RTL (9 files, 35 tests)
+        ├─────────────┤
         │ Integration │  TicketStatusTransitionIntegrationTest (13 tests)
         ├─────────────┤
         │   Service   │  TicketServiceTest (3 tests)
@@ -32,11 +34,16 @@ Testing focuses on the **backend**, where all business rules (especially the tic
 **How to run:**
 
 ```powershell
+# Backend (requires PostgreSQL + ticket_management database)
 cd backend
 .\gradlew.bat test
+
+# Frontend
+cd frontend
+npm test
 ```
 
-Requires PostgreSQL running locally with the `ticket_management` database (see `application-test.yml`).
+Backend integration tests require PostgreSQL running locally with the `ticket_management` database (see `application-test.yml`).
 
 **Traceability:** Tests map to `acceptance-criteria.md` (Core, Validation, Error Handling, Testing sections).
 
@@ -72,21 +79,31 @@ Uses `@ExtendWith(MockitoExtension.class)` with mocked `TicketRepository`, `User
 
 ## Component Tests
 
-**Status: Not implemented.**
+**Status: Implemented** (Vitest + React Testing Library + jsdom).
 
-The frontend has no automated component tests (no Vitest, React Testing Library, or Cypress/Playwright in `package.json`).
+**Run:** `cd frontend && npm test`
 
-**Planned manual coverage instead:**
+| File | What it verifies |
+|------|------------------|
+| `TicketListPage.test.tsx` | Renders tickets, debounced search, status filter |
+| `CreateTicketPage.test.tsx` | Form render, client validation, successful submit |
+| `TicketDetailPage.test.tsx` | Detail render, status buttons from `allowedNextStatuses`, status update, comment validation/submit |
+| `EditTicketPage.test.tsx` | Pre-filled form, validation, update submit |
+| `AppSnackbar.test.tsx` | Message display and dismiss |
+| `errorUtils.test.ts` | `getErrorMessage`, `getFieldErrors` |
+| `validationUtils.test.ts` | Create/update ticket and comment validation |
+| `statusUtils.test.ts` | Label and chip color helpers |
+| `dateUtils.test.ts` | Timestamp formatting |
 
-| Component / page | Manual check |
-|------------------|--------------|
-| `TicketListPage` | Search, status filter, pagination, navigation to detail |
-| `CreateTicketPage` | Form submit, validation errors from API, user dropdowns |
-| `TicketDetailPage` | Status buttons from `allowedNextStatuses`, comment add/list |
-| `EditTicketPage` | Update fields without status change |
-| `errorUtils` / `useSnackbar` | API errors surfaced to user |
+**Manual coverage still recommended:**
 
-**Why not automated:** Assignment scope prioritizes backend correctness and the status state machine. Frontend is a thin API client; manual smoke testing is sufficient for the current deliverable. Component tests would be a natural follow-up (Vitest + React Testing Library).
+| Scenario | Manual check |
+|----------|--------------|
+| Full ticket lifecycle in browser | Create → transition → comment → close |
+| Backend not running | Network error snackbar |
+| API validation errors (400) | Inline field errors from server |
+
+**Not covered by automated frontend tests:** E2E browser flows (Playwright/Cypress), cross-page navigation with a live backend, and visual/regression testing.
 
 ---
 
@@ -160,7 +177,7 @@ Covered primarily in integration tests (rejected transitions) and unit tests (va
 
 | Gap | Why not covered | Risk | Suggested follow-up |
 |-----|-----------------|------|---------------------|
-| **Frontend automated tests** | Thin client; manual E2E sufficient for assignment scope | UI regressions (wrong buttons, broken forms) | Add Vitest + RTL for pages; Playwright for E2E |
+| **Frontend E2E tests** | Vitest + RTL cover component behavior with mocked API | Cross-page flows with live backend | Add Playwright for full browser E2E |
 | **`PUT /api/tickets/{id}` update** | Core focus was status machine, not full CRUD | Update endpoint could break silently | Integration test for happy path + 404 assignee |
 | **`GET /api/tickets` list/search** | Search/pagination deemed lower risk than transitions | Filter/pagination bugs | MockMvc tests with keyword + status + page params |
 | **`GET /api/tickets/{id}`** | Covered indirectly via status patch responses | Detail endpoint-specific bugs | Dedicated GET test asserting `allowedNextStatuses` |
@@ -185,6 +202,6 @@ Covered primarily in integration tests (rejected transitions) and unit tests (va
 | Unit | `TicketStatusTransitionValidatorTest`, `TicketServiceTest` | 6 | Fast feedback on business rules and service orchestration |
 | Integration | `TicketStatusTransitionIntegrationTest` | 13 | End-to-end HTTP → service → DB for transitions and key APIs |
 | Smoke | `TicketManagementApplicationTests` | 1 | Context wiring |
-| Frontend | — | 0 | Manual smoke test before submission |
+| Frontend | 9 Vitest files (pages, utils, components) | 35 | UI behavior with mocked API; status buttons from `allowedNextStatuses` |
 
-The strategy prioritizes **correctness of the status state machine** — the highest-risk, most business-critical part of the application — with defense in depth across unit, service, and integration layers.
+The strategy prioritizes **correctness of the status state machine** — the highest-risk, most business-critical part of the application — with defense in depth across unit, service, integration, and frontend component layers.

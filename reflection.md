@@ -6,7 +6,7 @@ A full-stack **Support Ticket Management System** for internal support workflows
 
 - **Backend:** Spring Boot 3.3 REST API (Java 21, Gradle, PostgreSQL) with ticket CRUD, comment management, user listing, Bean Validation, and a server-enforced status state machine (`OPEN` → `IN_PROGRESS` → `RESOLVED` → `CLOSED`, with cancellation from `OPEN` or `IN_PROGRESS`).
 - **Frontend:** React 19 + TypeScript + Vite + MUI SPA with list/search/filter, create, detail (dynamic status buttons from `allowedNextStatuses`), edit, and comment threads.
-- **Tests:** 20 backend tests — unit (validator), service (mocked), and integration (MockMvc + live PostgreSQL) focused on the status machine.
+- **Tests:** 20 backend tests (unit, service, integration) + 35 frontend Vitest tests — focused on the status machine and UI behavior with mocked API.
 - **Documentation:** README, requirements analysis, acceptance criteria, implementation plan, design notes, API contract, test strategy, debugging notes, code review notes, and this reflection.
 
 The guiding principle throughout: **the backend owns business rules; the frontend is a thin client.**
@@ -78,7 +78,6 @@ I did **not** accept AI output without running at least one of: build, test suit
 | Priority | Improvement | Why |
 |----------|-------------|-----|
 | **High** | Testcontainers for integration tests | Remove dependency on manually running local PostgreSQL; enable CI |
-| **High** | Frontend tests (Vitest + RTL) | Protect `allowedNextStatuses` button rendering and form error handling |
 | **Medium** | Integration tests for `PUT`, list/search, comment validation | Close gaps documented in `test-strategy.md` |
 | **Medium** | Role-based authorization | `UserRole` exists but is unused — needs PO decision on who can transition status |
 | **Medium** | Environment-based config | Move DB password out of `application.yml`; use `.env` / secrets for local dev |
@@ -86,7 +85,7 @@ I did **not** accept AI output without running at least one of: build, test suit
 | **Low** | Optimistic locking (`@Version`) | Prevent silent overwrites on concurrent edits |
 | **Low** | React Query for API caching | Reduce refetching when navigating between list and detail |
 
-If I had more time on this assignment, I would spend it on **Testcontainers + frontend tests** — the two biggest quality gaps for a production-bound app.
+If I had more time on this assignment, I would spend it on **Testcontainers + E2E browser tests** — the two biggest quality gaps for a production-bound app.
 
 ---
 

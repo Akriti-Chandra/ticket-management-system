@@ -260,3 +260,18 @@ cd backend
 Requires PostgreSQL running locally with the `ticket_management` database (see `application-test.yml`).
 
 **Traceability:** Tests map directly to items in `acceptance-criteria.md` (Core, Validation, Error Handling, Testing sections).
+
+### Frontend tests
+
+| Level | Location | What it covers |
+|-------|----------|----------------|
+| **Component** | `frontend/src/**/*.test.tsx`, `*.test.ts` | Pages (list, create, detail, edit), utilities, snackbar — mocked API |
+
+**How to run:**
+
+```bash
+cd frontend
+npm test
+```
+
+**Traceability:** `TicketDetailPage.test.tsx` verifies status buttons render from `allowedNextStatuses` only.

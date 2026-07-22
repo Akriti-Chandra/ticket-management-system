@@ -2,58 +2,59 @@
 
 ## Core
 
-- [ ] A user can create a ticket with title, description, priority, assignee, and creator; the ticket is persisted with status `OPEN`.
-- [ ] A user can list tickets with pagination (`page`, `size`).
-- [ ] A user can filter the ticket list by status (`OPEN`, `IN_PROGRESS`, `RESOLVED`, `CLOSED`, `CANCELLED`).
-- [ ] A user can search tickets by keyword (title and/or description).
-- [ ] A user can view a single ticket by ID, including assignee, creator, timestamps, and `allowedNextStatuses`.
-- [ ] A user can update ticket title, description, priority, and assignee without changing status via the update endpoint.
-- [ ] A user can change ticket status via `PATCH /api/tickets/{id}/status`.
-- [ ] Valid status transitions are enforced:
-  - [ ] `OPEN` → `IN_PROGRESS`
-  - [ ] `OPEN` → `CANCELLED`
-  - [ ] `IN_PROGRESS` → `RESOLVED`
-  - [ ] `IN_PROGRESS` → `CANCELLED`
-  - [ ] `RESOLVED` → `CLOSED`
-- [ ] `CLOSED` and `CANCELLED` are terminal — no further transitions are allowed.
-- [ ] A user can add a comment to a ticket (message + author).
-- [ ] A user can list comments for a ticket, ordered newest first.
-- [ ] A user can list seeded users for assignee/creator dropdowns in the UI.
-- [ ] The frontend displays only status actions returned in `allowedNextStatuses` (no hard-coded transition buttons).
-- [ ] The frontend provides pages for ticket list, create, detail, and edit.
-- [ ] Seed data loads on first backend startup (users, sample tickets, comments) without duplication on restart.
+- [x] A user can create a ticket with title, description, priority, assignee, and creator; the ticket is persisted with status `OPEN`.
+- [x] A user can list tickets with pagination (`page`, `size`).
+- [x] A user can filter the ticket list by status (`OPEN`, `IN_PROGRESS`, `RESOLVED`, `CLOSED`, `CANCELLED`).
+- [x] A user can search tickets by keyword (title and/or description).
+- [x] A user can view a single ticket by ID, including assignee, creator, timestamps, and `allowedNextStatuses`.
+- [x] A user can update ticket title, description, priority, and assignee without changing status via the update endpoint.
+- [x] A user can change ticket status via `PATCH /api/tickets/{id}/status`.
+- [x] Valid status transitions are enforced:
+  - [x] `OPEN` → `IN_PROGRESS`
+  - [x] `OPEN` → `CANCELLED`
+  - [x] `IN_PROGRESS` → `RESOLVED`
+  - [x] `IN_PROGRESS` → `CANCELLED`
+  - [x] `RESOLVED` → `CLOSED`
+- [x] `CLOSED` and `CANCELLED` are terminal — no further transitions are allowed.
+- [x] A user can add a comment to a ticket (message + author).
+- [x] A user can list comments for a ticket, ordered newest first.
+- [x] A user can list seeded users for assignee/creator dropdowns in the UI.
+- [x] The frontend displays only status actions returned in `allowedNextStatuses` (no hard-coded transition buttons).
+- [x] The frontend provides pages for ticket list, create, detail, and edit.
+- [x] Seed data loads on first backend startup (users, sample tickets, comments) without duplication on restart.
 
 ## Validation
 
-- [ ] Required fields are enforced on ticket creation (title, description, priority, assignee, creator).
-- [ ] Blank or whitespace-only title is rejected with a field-level validation error.
-- [ ] Title length respects the schema limit (max 200 characters).
-- [ ] Priority must be one of `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
-- [ ] Status must be one of `OPEN`, `IN_PROGRESS`, `RESOLVED`, `CLOSED`, `CANCELLED`.
-- [ ] `assignedToId` and `createdById` must reference existing users.
-- [ ] Comment message is required and cannot be blank.
-- [ ] Invalid status transition requests are rejected before persisting any change.
-- [ ] Database constraints prevent invalid priority/status values at the persistence layer.
+- [x] Required fields are enforced on ticket creation (title, description, priority, assignee, creator).
+- [x] Blank or whitespace-only title is rejected with a field-level validation error.
+- [x] Title length respects the schema limit (max 200 characters).
+- [x] Priority must be one of `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
+- [x] Status must be one of `OPEN`, `IN_PROGRESS`, `RESOLVED`, `CLOSED`, `CANCELLED`.
+- [x] `assignedToId` and `createdById` must reference existing users.
+- [x] Comment message is required and cannot be blank.
+- [x] Invalid status transition requests are rejected before persisting any change.
+- [x] Database constraints prevent invalid priority/status values at the persistence layer.
 
 ## Error Handling
 
-- [ ] Requesting a non-existent ticket returns `404 Not Found` with a clear message.
-- [ ] Requesting a non-existent user (assignee/creator/comment author) returns `404 Not Found`.
-- [ ] Validation failures return `400 Bad Request` with field-level error details.
-- [ ] Invalid status transitions return `400 Bad Request` with a message naming the `from` and `to` statuses.
-- [ ] Failed status transitions do not modify the ticket status in the database.
-- [ ] Unexpected server errors return `500 Internal Server Error` with a generic message (no stack trace leaked to the client).
-- [ ] The frontend surfaces API errors to the user (e.g., snackbar or inline message).
+- [x] Requesting a non-existent ticket returns `404 Not Found` with a clear message.
+- [x] Requesting a non-existent user (assignee/creator/comment author) returns `404 Not Found`.
+- [x] Validation failures return `400 Bad Request` with field-level error details.
+- [x] Invalid status transitions return `400 Bad Request` with a message naming the `from` and `to` statuses.
+- [x] Failed status transitions do not modify the ticket status in the database.
+- [x] Unexpected server errors return `500 Internal Server Error` with a generic message (no stack trace leaked to the client).
+- [x] The frontend surfaces API errors to the user (e.g., snackbar or inline message).
 
 ## Testing
 
-- [ ] Unit tests cover the status transition validator (allowed and disallowed transitions).
-- [ ] Service-layer tests cover ticket create, update, and status change behavior.
-- [ ] Integration tests verify successful transitions: `OPEN` → `IN_PROGRESS`, `IN_PROGRESS` → `RESOLVED`, `RESOLVED` → `CLOSED`, and cancellation paths.
-- [ ] Integration tests verify rejected transitions (e.g., `OPEN` → `CLOSED`, `RESOLVED` → `OPEN`, `CLOSED` → `IN_PROGRESS`) leave the DB unchanged.
-- [ ] Integration tests cover validation errors (e.g., blank title on create).
-- [ ] Integration tests cover comment creation and user listing.
-- [ ] All backend tests pass via `./gradlew test` with PostgreSQL running locally.
+- [x] Unit tests cover the status transition validator (allowed and disallowed transitions).
+- [x] Service-layer tests cover ticket create, update, and status change behavior.
+- [x] Integration tests verify successful transitions: `OPEN` → `IN_PROGRESS`, `IN_PROGRESS` → `RESOLVED`, `RESOLVED` → `CLOSED`, and cancellation paths.
+- [x] Integration tests verify rejected transitions (e.g., `OPEN` → `CLOSED`, `RESOLVED` → `OPEN`, `CLOSED` → `IN_PROGRESS`) leave the DB unchanged.
+- [x] Integration tests cover validation errors (e.g., blank title on create).
+- [x] Integration tests cover comment creation and user listing.
+- [x] All backend tests pass via `./gradlew test` with PostgreSQL running locally.
+- [x] Frontend component tests pass via `npm test` (Vitest + React Testing Library).
 
 ## Documentation
 

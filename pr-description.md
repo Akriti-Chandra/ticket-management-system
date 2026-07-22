@@ -120,6 +120,16 @@ This PR delivers a full-stack **Support Ticket Management System** — a Spring 
 
 **Run:** `cd backend && .\gradlew.bat test` (requires local PostgreSQL + `ticket_management` DB)
 
+### Automated (frontend)
+
+| Suite | Files | Count | Coverage |
+|-------|-------|-------|----------|
+| Pages | `TicketListPage`, `CreateTicketPage`, `TicketDetailPage`, `EditTicketPage` | 14 | List/search/filter, forms, status buttons from API, comments |
+| Utils | `errorUtils`, `validationUtils`, `statusUtils`, `dateUtils` | 19 | Error parsing, validation, display helpers |
+| Components | `AppSnackbar` | 2 | Toast display and dismiss |
+
+**Run:** `cd frontend && npm test`
+
 ### Manual
 
 - [x] Full ticket lifecycle in browser: create → `IN_PROGRESS` → `RESOLVED` → `CLOSED`
@@ -131,7 +141,7 @@ This PR delivers a full-stack **Support Ticket Management System** — a Spring 
 - [x] Swagger UI endpoint verification
 
 ### Not covered
-- Frontend automated tests (0)
+- E2E browser tests with live backend (Playwright/Cypress)
 - `PUT` update and list/search integration tests (documented gaps in `test-strategy.md`)
 
 ---
@@ -206,7 +216,7 @@ npm run dev
 | **No status audit trail** | Status changes are not historized |
 | **No optimistic locking** | Concurrent edits are last-write-wins |
 | **Local PostgreSQL required** | No Docker Compose; tests need live DB |
-| **No frontend tests** | UI verified manually only |
+| **No E2E browser tests** | Component tests use mocked API; full browser flows verified manually |
 | **Default DB password in config** | `application.yml` uses `Password` — override via env vars for real use |
 | **Comments cannot be edited/deleted** | Create and list only |
 
@@ -217,7 +227,7 @@ npm run dev
 | Priority | Improvement |
 |----------|-------------|
 | High | Testcontainers for CI-friendly integration tests |
-| High | Frontend tests (Vitest + React Testing Library) for status buttons and forms |
+| Medium | Playwright E2E tests against live backend |
 | Medium | Spring Security + role-based transition permissions |
 | Medium | Status change history (`ticket_status_events` table) |
 | Medium | Integration tests for `PUT`, list/search, comment validation |
@@ -231,6 +241,7 @@ npm run dev
 
 - [ ] Backend starts and seed data loads (`bootRun`)
 - [ ] `./gradlew.bat test` passes with PostgreSQL running
+- [ ] `npm test` passes (frontend)
 - [ ] Frontend connects to API (`npm run dev`)
 - [ ] Status buttons match `allowedNextStatuses` from API
 - [ ] Invalid transitions return `400` without DB change
