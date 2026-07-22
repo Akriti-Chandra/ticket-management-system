@@ -62,7 +62,7 @@
 - [x] `README.md` documents PostgreSQL setup, default connection settings, and environment variable overrides.
 - [x] `README.md` lists all REST API endpoints with HTTP method and purpose.
 - [x] Swagger UI is available at `/swagger-ui.html` and OpenAPI spec at `/v3/api-docs`.
-- [ ] `candidate-info.md` captures candidate and project metadata, including Project Summary, Tools Used, Setup Summary, and Submission Date.
+- [x] `candidate-info.md` captures candidate and project metadata, including Project Summary, Tools Used, Setup Summary, and Submission Date.
 - [x] `requirements-analysis.md` documents understanding, functional/non-functional requirements, assumptions, clarifications, and edge cases.
 - [x] `acceptance-criteria.md` (this file) defines verifiable done conditions for the assignment.
 - [x] `implementation-plan.md` covers overview, task breakdown, milestones, AI usage plan, risks, and mitigation.

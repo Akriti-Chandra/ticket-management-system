@@ -189,9 +189,7 @@ Vitest + React Testing Library cover pages, utilities, and shared components (mo
 
 ## Seed data
 
-`data.sql` inserts six users with mixed roles (`EMPLOYEE`, `SUPPORT_AGENT`, `ADMIN`), **two** sample tickets (`OPEN`, `IN_PROGRESS`), and two comments. Inserts are idempotent (`ON CONFLICT` / `NOT EXISTS`), so restarting the backend does not duplicate seed rows.
-
-> **Note:** The standalone scripts in `database/seed-data/` include four tickets and four comments for manual `psql` setup. If you want the same richer demo data on automatic startup, sync those inserts into `backend/src/main/resources/data.sql` (see `database/setup-notes.md`).
+`data.sql` inserts six users with mixed roles (`EMPLOYEE`, `SUPPORT_AGENT`, `ADMIN`), four sample tickets across statuses (`OPEN`, `IN_PROGRESS`, `RESOLVED`, `CLOSED`), and four comments. Inserts are idempotent (`ON CONFLICT` / `NOT EXISTS`), so restarting the backend does not duplicate seed rows.
 
 Example seeded users:
 

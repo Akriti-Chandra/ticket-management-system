@@ -185,8 +185,8 @@ Defined in `database/seed-data/` and `backend/src/main/resources/data.sql`:
 | Entity | Count | Notes |
 |--------|-------|-------|
 | Users | 6 | 3 employees, 2 agents, 1 admin |
-| Tickets | 2 (classpath `data.sql`) / 4 (manual `database/seed-data/`) | See `database/setup-notes.md` |
-| Comments | 2 (classpath `data.sql`) / 4 (manual `database/seed-data/`) | Linked to sample tickets |
+| Tickets | 4 | Sample tickets across statuses (see `database/setup-notes.md`) |
+| Comments | 4 | Linked to sample tickets |
 
 All seed inserts are idempotent (`ON CONFLICT DO NOTHING` / `NOT EXISTS`).
 

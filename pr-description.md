@@ -100,7 +100,7 @@ This PR delivers a full-stack **Support Ticket Management System** — a Spring 
 
 ### Seed data (`data.sql`)
 - 6 users (mixed roles)
-- 2 sample tickets with comments
+- 4 sample tickets with comments
 - Idempotent inserts (`ON CONFLICT` / `NOT EXISTS`)
 
 **Migration approach:** `schema.sql` + `data.sql` run on startup via Spring SQL init (no Flyway/Liquibase).
